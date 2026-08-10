@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     // Menangkap IP dari body request
     const { ip } = await req.json();
-    
+
     if (!ip) {
       return NextResponse.json({ status: "ignored" }, { status: 400 });
     }
@@ -31,15 +31,15 @@ export async function POST(req: NextRequest) {
     });
 
     try {
-      const n8nWebhookUrl = "https://linling.app.n8n.cloud/webhook/analyst";
+      const n8nWebhookUrl = "https://rmsrms.app.n8n.cloud/webhook/analyst";
       console.log('Try sending result to n8n');
       await fetch(n8nWebhookUrl, {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${process.env.N8N_AUTH_TOKEN}`
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           ip: ip,
           timestamp: new Date().toISOString(),
           message: "Ada pengunjung baru!"
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ status: "queued_and_sent_to_n8n" });
-    
+
   } catch (error) {
     console.error("Terjadi kesalahan pada Server:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
