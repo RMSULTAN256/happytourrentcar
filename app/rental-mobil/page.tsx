@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { MapPin, Calendar, Clock, Users, Car, Settings, Fuel, ChevronRight } from "lucide-react";
+import { MapPin, Calendar, Users, Settings, Fuel, ChevronRight } from "lucide-react";
 import carsData from "../../data/car.json";
 
 export default function RentalMobil() {
@@ -161,39 +161,51 @@ export default function RentalMobil() {
                   <h3 className="text-xl font-bold text-gray-800 mb-4">{car.name}</h3>
                   
                   <div className="grid grid-cols-2 gap-y-3 gap-x-2 mb-6">
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <Users size={16} className="mr-2 text-orange-500" />
+                    <div className="flex items-center text-gray-700 text-sm font-medium">
+                      <Users size={16} className="mr-2 text-orange-500 shrink-0" />
                       {car.seats} Kursi
                     </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <Settings size={16} className="mr-2 text-orange-500" />
+                    <div className="flex items-center text-gray-700 text-sm font-medium">
+                      <Settings size={16} className="mr-2 text-orange-500 shrink-0" />
                       {car.transmission}
                     </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <Fuel size={16} className="mr-2 text-orange-500" />
+                    <div className="flex items-center text-gray-700 text-sm font-medium">
+                      <Fuel size={16} className="mr-2 text-orange-500 shrink-0" />
                       {car.fuel}
                     </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <Calendar size={16} className="mr-2 text-orange-500" />
+                    <div className="flex items-center text-gray-700 text-sm font-medium">
+                      <Calendar size={16} className="mr-2 text-orange-500 shrink-0" />
                       Tahun {car.year}
                     </div>
                   </div>
 
-                  <div className="mt-auto border-t border-gray-100 pt-4 flex items-center justify-between">
+                  <div className="mt-auto border-t border-gray-100 pt-4 flex items-end justify-between gap-2">
                     <div>
-                      <span className="text-xs text-gray-500 block">Mulai dari</span>
-                      <span className="text-lg font-bold text-orange-600 flex flex-col">
-                        <span>Rp{car.price.toLocaleString("id-ID")}<span className="text-sm font-normal text-gray-500">/hari</span></span>
-                        {car.isAllIn && (
-                          <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-sm w-max mt-1 uppercase tracking-wide border border-green-100">
+                      <span className="text-xs text-gray-500 block font-medium">Mulai dari</span>
+                      <div className="text-lg font-bold text-orange-600">
+                        Rp{car.price.toLocaleString("id-ID")}<span className="text-xs font-normal text-gray-500">/hari</span>
+                      </div>
+                      <div className="h-5 mt-1 flex items-center">
+                        {car.isAllIn ? (
+                          <span className="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-sm uppercase tracking-wide border border-green-200">
                             ✓ All-In Package
                           </span>
+                        ) : (
+                          <span className="text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded-sm uppercase tracking-wide border border-gray-200">
+                            Unit Only
+                          </span>
                         )}
-                      </span>
+                      </div>
                     </div>
-                    <button className="bg-orange-600 hover:bg-orange-700 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                      <ChevronRight size={20} />
-                    </button>
+                    <a
+                      href={`https://wa.me/6282283225920?text=${encodeURIComponent(`Halo Admin Happy Tour, saya tertarik untuk rental mobil ${car.name} (${rentalType}). Apakah masih tersedia?`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-xl transition-all flex items-center gap-1 shrink-0 shadow-sm hover:shadow cursor-pointer"
+                    >
+                      <span>Sewa</span>
+                      <ChevronRight size={15} />
+                    </a>
                   </div>
                 </div>
               </div>

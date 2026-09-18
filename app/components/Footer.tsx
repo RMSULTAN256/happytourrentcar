@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, ChevronRight } from "lucide-react";
+import { MapPin, Phone, ChevronRight } from "lucide-react";
 
 export default function Footer() {
   return (

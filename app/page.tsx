@@ -15,6 +15,16 @@ export default function Home() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("Semua");
+
+  const categories = ["Semua", "City Car", "MPV", "Minibus & Bus"];
+
+  const filteredCars = selectedCategory === "Semua"
+    ? carsData
+    : selectedCategory === "Minibus & Bus"
+    ? carsData.filter((c) => c.type.includes("Bus") || c.type.includes("Minibus"))
+    : carsData.filter((c) => c.type === selectedCategory);
+
   useEffect(() => {
     const interval= setInterval(() => {
       setCurrentIndex((prevIndex) => 
@@ -120,12 +130,30 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4">
             Pilihan Armada Kami
           </h2>
-          <p className="text-gray-500 text-center mb-12 max-w-2xl">
+          <p className="text-gray-500 text-center mb-8 max-w-2xl">
             Berbagai pilihan mobil yang selalu terawat dan siap menemani perjalananmu.
           </p>
 
+          {/* Filter Kategori */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-all cursor-pointer ${
+                  selectedCategory === cat
+                    ? "bg-orange-600 text-white shadow-md shadow-orange-600/20"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-            {carsData.map((car) => (
+            {filteredCars.map((car) => (
               <div 
                 key={car.id} 
                 className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
@@ -146,40 +174,51 @@ export default function Home() {
                 <div className="p-6 flex flex-col grow">
                   <h3 className="text-xl font-bold text-gray-800 mb-4">{car.name}</h3>
                   <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-6">
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <Users size={16} className="mr-2 text-orange-500" />
+                    <div className="flex items-center text-gray-700 text-sm font-medium">
+                      <Users size={16} className="mr-2 text-orange-500 shrink-0" />
                       {car.seats} Kursi
                     </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <Settings size={16} className="mr-2 text-orange-500" />
+                    <div className="flex items-center text-gray-700 text-sm font-medium">
+                      <Settings size={16} className="mr-2 text-orange-500 shrink-0" />
                       {car.transmission}
                     </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <Fuel size={16} className="mr-2 text-orange-500" />
+                    <div className="flex items-center text-gray-700 text-sm font-medium">
+                      <Fuel size={16} className="mr-2 text-orange-500 shrink-0" />
                       {car.fuel}
                     </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <Calendar size={16} className="mr-2 text-orange-500" />
+                    <div className="flex items-center text-gray-700 text-sm font-medium">
+                      <Calendar size={16} className="mr-2 text-orange-500 shrink-0" />
                       Tahun {car.year}
                     </div>
                   </div>
 
-                  <div className="mt-auto border-t border-gray-100 pt-4 flex items-center justify-between">
+                  <div className="mt-auto border-t border-gray-100 pt-4 flex items-end justify-between gap-2">
                     <div>
-                      <span className="text-xs text-gray-500 block">Mulai dari</span>
-                      <span className="text-lg font-bold text-orange-600 flex flex-col">
-                        <span>Rp{car.price.toLocaleString("id-ID")}<span className="text-sm font-normal text-gray-500">/hari</span></span>
-                        
-                        {car.isAllIn && (
-                          <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-sm w-max mt-1 uppercase tracking-wide border border-green-100">
+                      <span className="text-xs text-gray-500 block font-medium">Mulai dari</span>
+                      <div className="text-lg font-bold text-orange-600">
+                        Rp{car.price.toLocaleString("id-ID")}<span className="text-xs font-normal text-gray-500">/hari</span>
+                      </div>
+                      <div className="h-5 mt-1 flex items-center">
+                        {car.isAllIn ? (
+                          <span className="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-sm uppercase tracking-wide border border-green-200">
                             ✓ All-In Package
                           </span>
+                        ) : (
+                          <span className="text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded-sm uppercase tracking-wide border border-gray-200">
+                            Unit Only
+                          </span>
                         )}
-                      </span>
+                      </div>
                     </div>
-                    <button className="bg-orange-600 hover:bg-orange-700 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                      <ChevronRight size={20} />
-                    </button>
+                    <a
+                      href={`https://wa.me/6282283225920?text=${encodeURIComponent(`Halo Admin Happy Tour, saya tertarik untuk sewa mobil ${car.name}. Apakah unit masih tersedia?`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-xl transition-all flex items-center gap-1 shrink-0 shadow-sm hover:shadow cursor-pointer"
+                    >
+                      <span>Sewa</span>
+                      <ChevronRight size={15} />
+                    </a>
                   </div>
                 </div>
               </div>
