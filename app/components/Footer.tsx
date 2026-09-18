@@ -38,7 +38,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/rental-mobil" className="flex items-center gap-2 hover:text-orange-400 transition-colors group">dwadoorotoooo<ChevronRight size={14} className="text-orange-500 group-hover:translate-x-1 transition-transform" /> Rental Mobil Harian
+                <a href="/rental-mobil" className="flex items-center gap-2 hover:text-orange-400 transition-colors group"><ChevronRight size={14} className="text-orange-500 group-hover:translate-x-1 transition-transform" /> Rental Mobil Harian
                 </a>
               </li>
             </ul>
