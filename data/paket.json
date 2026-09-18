@@ -83,6 +83,10 @@
     "Tiket lawatan Pantai Pink",
     "Air mineral 1 Btl/Day"
   ],
+    "excludes": [
+      "Pengeluaran Pribadi & Belanja",
+      "Tipping Supir / Guide (Sukarela)"
+    ],
     "image": "/header5.png",
   "itinerary": [
     {
