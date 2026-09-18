@@ -7,6 +7,25 @@
     "location": "Batam",
     "price": 400,
     "description": "Liburan singkat dan padat mencakup ikon Batam, wisata religi seperti Mesjid Tanjak, dan spot foto hits seperti Dino's Gate.",
+    "highlights": [
+      "Welcome to Batam",
+      "Jembatan Barelang",
+      "Mesjid Sultan Mahmud Riwayat Syah",
+      "Dino's Gate & The Illusions",
+      "Nagoya Hill / DC Mall"
+    ],
+    "includes": [
+      "Tiket Ferry Johor to Batam 2 Way",
+      "Hotel 3 Bintang 1 Malam",
+      "Transport Full AC 2 Hari di Batam",
+      "Breakfast 1x, Lunch 2x, Dinner 1x",
+      "Tiket Wisata & Lawatan (Dino's Gate, dll)",
+      "Air Mineral 1 btl/day"
+    ],
+    "excludes": [
+      "Pengeluaran Pribadi & Belanja",
+      "Tipping Supir / Guide (Sukarela)"
+    ],
     "image": "/welcometo.png",
     "itinerary": [
       {
